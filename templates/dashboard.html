@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html>
+
 <head>
     <title>Cyber Threat Detector</title>
     <link rel="stylesheet" href="/static/style.css">
@@ -15,16 +16,35 @@
         Analyze suspicious URLs and monitor threats.
     </p>
 
-    <form>
+    <form action="/check_url" method="POST">
+
         <input
             type="text"
+            name="url"
             placeholder="Enter suspicious URL..."
+            required
         >
 
         <button type="submit">
             Analyze
         </button>
+
     </form>
+
+    {% if result %}
+
+        <div class="result-box">
+
+            <h2>{{ result }}</h2>
+
+            <p>
+                URL Checked:
+                <strong>{{ url }}</strong>
+            </p>
+
+        </div>
+
+    {% endif %}
 
 </div>
 
