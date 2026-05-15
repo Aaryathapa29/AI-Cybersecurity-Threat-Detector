@@ -1,50 +1,62 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 
 <head>
-    <title>Cyber Threat Detector</title>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>AI Cyber Threat Detector</title>
+
     <link rel="stylesheet" href="/static/style.css">
+
 </head>
 
 <body>
 
+<div class="background"></div>
+
 <div class="container">
 
-    <h1>AI Cybersecurity Threat Detector</h1>
+    <div class="card">
 
-    <p>
-        Analyze suspicious URLs and monitor threats.
-    </p>
+        <h1>AI Cybersecurity Threat Detector</h1>
 
-    <form action="/check_url" method="POST">
+        <p class="subtitle">
+            Machine Learning Powered URL Threat Analysis
+        </p>
 
-        <input
-            type="text"
-            name="url"
-            placeholder="Enter suspicious URL..."
-            required
-        >
+        <form action="/check_url" method="POST">
 
-        <button type="submit">
-            Analyze
-        </button>
+            <input
+                type="text"
+                name="url"
+                placeholder="Enter suspicious URL..."
+                required
+            >
 
-    </form>
+            <button type="submit">
+                Analyze Threat
+            </button>
 
-    {% if result %}
+        </form>
+
+        {% if result %}
 
         <div class="result-box">
 
             <h2>{{ result }}</h2>
 
             <p>
-                URL Checked:
+                URL:
                 <strong>{{ url }}</strong>
             </p>
 
         </div>
 
-    {% endif %}
+        {% endif %}
+
+    </div>
 
 </div>
 

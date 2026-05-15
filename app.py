@@ -1,6 +1,9 @@
 from flask import Flask, render_template, request
+import joblib
 
 app = Flask(__name__)
+
+model = joblib.load("phishing_model.pkl")
 
 @app.route('/')
 def home():
@@ -11,20 +14,19 @@ def check_url():
 
     url = request.form['url']
 
-    # Temporary detection logic
-    suspicious_keywords = [
-        "login",
-        "verify",
-        "bank",
-        "secure",
-        "update"
-    ]
+    features = [[
+        len(url),
+        url.count('.'),
+        url.count('-'),
+        1 if "https" in url else 0
+    ]]
+
+    prediction = model.predict(features)
 
     result = "SAFE"
 
-    for word in suspicious_keywords:
-        if word in url.lower():
-            result = "SUSPICIOUS URL DETECTED"
+    if prediction[0] == 1:
+        result = "PHISHING DETECTED"
 
     return render_template(
         'dashboard.html',
